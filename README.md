@@ -50,6 +50,7 @@ Users are responsible for complying with the terms of service of the platforms t
 ##  Version
 
 Current Version: v1.0.0
+Update Fixed Download Playlist v1.1.0
 
 ---
 
