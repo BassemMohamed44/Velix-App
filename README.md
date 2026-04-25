@@ -49,12 +49,12 @@ Users are responsible for complying with the terms of service of the platforms t
 
 ##  Version
 
--Current Version: v1.0.0
--The feature to download a complete playlist has been added. v1.1.0
--Fixed bugs in background state.
--New UI/UX. v2.0.0
--A pause download button has been added. v2.1.0
--The app freezing issue has been fixed and Fixed Bugs. v2.1.2
+- Current Version: v1.0.0
+- The feature to download a complete playlist has been added. v1.1.0
+- Fixed bugs in background state.
+- New UI/UX. v2.0.0
+- A pause download button has been added. v2.1.0
+- The app freezing issue has been fixed and Fixed Bugs. v2.1.2
 ---
 
 ##  License
