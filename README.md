@@ -27,6 +27,7 @@ Get the latest version here:
 ##  System Requirements
 
 - Windows 7 / 10 / 11
+- Linux Ubuntu / Arch / Mint
 - 2GB RAM minimum
 - Internet connection required
 
