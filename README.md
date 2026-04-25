@@ -50,7 +50,9 @@ Users are responsible for complying with the terms of service of the platforms t
 ##  Version
 
 Current Version: v1.0.0
-Update Fixed Download Playlist v1.1.0
+Update Fixed Download Playlist. v1.1.0
+New UI/UX and Fixed Bugs. v2.1.0
+The app freezing issue has been fixed. v2.1.2
 
 ---
 
