@@ -20,7 +20,7 @@ Clean interface. High performance. No distractions.
 
 Get the latest version here:
 
- https://github.com/BassemMohamed44/Velix-App/releases/download/v1.1.0/VelixSetup.exe
+ https://github.com/BassemMohamed44/Velix-App/releases/download/v2.1.2/Velix.exe
 
 ---
 
