@@ -7,7 +7,6 @@ Clean interface. High performance. No distractions.
 ---
 
 ## Screenshot
-<img src="" alt="" > ## Velix | Video Downloader
 <img src="Velix-screenshot.png" alt="Velix Downloader">
 
 
