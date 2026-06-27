@@ -20,8 +20,7 @@ Clean interface. High performance. No distractions.
 
 Get the latest version here:
 
- https://github.com/BassemMohamed44/Velix-App/releases/download/v2.1.2/Velix.exe
-
+### https://github.com/BassemMohamed44/Velix-App/releases/download/v2.1.2/Velix.zip
 ---
 
 ##  System Requirements
@@ -44,7 +43,9 @@ Users are responsible for complying with the terms of service of the platforms t
 ##  Built With
 
 - Python
-- yt-dlp
+- Yt-dlp
+- Customtkinter
+- Tkinter
 
 ---
 
