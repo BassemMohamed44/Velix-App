@@ -1,10 +1,14 @@
 # Velix App
 
-Velix is a fast and powerful media downloader designed for public and user-authorized content.
+Velix is the lightweight, secure, and ad-free video downloader built for speed. Extract audio and video in any quality from your favorite platforms.
 
 Clean interface. High performance. No distractions.
 
 ---
+
+## ScreenShot
+
+<img src="" alt="">
 
 ##  Features
 
@@ -20,7 +24,8 @@ Clean interface. High performance. No distractions.
 
 Get the latest version here:
 
-### https://github.com/BassemMohamed44/Velix-App/releases/download/v2.1.2/Velix.zip
+### [![Static Badge](https://img.shields.io/badge/Download%20Now-Now?style=for-the-badge&color=%23650ADC)](https://github.com/BassemMohamed44/Velix-App/releases/download/v2.1.2/Velix.zip)
+
 ---
 
 ##  System Requirements
