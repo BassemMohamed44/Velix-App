@@ -26,7 +26,7 @@ Clean interface. High performance. No distractions.
 
 Get the latest version here:
 
-### [![Static Badge](https://img.shields.io/badge/Download%20Now-Now?style=for-the-badge&color=%23650ADC)](https://github.com/BassemMohamed44/Velix-App/releases/download/v2.1.2/Velix-Setup-v2.1.2.exe)
+### [![Static Badge](https://img.shields.io/badge/Download%20Now-Now?style=for-the-badge&color=%23650ADC)](https://velix-downloader.pages.dev/)
 
 ---
 
