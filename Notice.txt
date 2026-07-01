@@ -1,0 +1,23 @@
+### Before running the program, create a virtual environment and download the following libraries.:
+- customtkinter  
+-  webbrowser
+-  PIL
+- yt_dlp
+- requests
+=====================
+
+## If you want to change the program's original icon, search for it and change it. 
+- " VelixNew_fixed.ico "  
+
+=====================
+
+## Download 
+- ffmpeg.exe
+- ffplay.exe
+- ffprobe.exe
+
+=====================
+By:00xBassem
+Instagram :@bassemmohamed_0
+Twitter/X :@Basem2Mohamed
+Social Hub :https://bassem-social-hub.pages.dev/
