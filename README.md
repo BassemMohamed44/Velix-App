@@ -7,8 +7,8 @@ Clean interface. High performance. No distractions.
 ---
 
 ## Screenshot
-<img src="Velix-screenshot.png" alt="Velix Downloader">
-<img src="Velix-App1.png" alt="Velix Downloader">
+<img src="assets/Velix-screenshot.png" alt="Velix Downloader">
+<img src="assets/Velix-App1.png" alt="Velix Downloader">
 
 
 
