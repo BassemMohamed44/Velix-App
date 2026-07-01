@@ -111,14 +111,8 @@ def get_ffmpeg_dir() -> str:
 
 
 def get_icon_path() -> str:
-    """
-    مسار الأيقونة — بيشتغل في 3 حالات:
-      1. exe (PyInstaller frozen)       → بجانب الـ .exe أو في _internal
-      2. PyArmor مشفر (not frozen)     → بجانب الـ Velix.py المشفر
-      3. تشغيل مباشر من الـ source     → بجانب الـ Velix.py الأصلي
-    """
+
     if getattr(sys, 'frozen', False):
-        # حالة الـ exe — PyInstaller
         exe_dir = os.path.dirname(sys.executable)
         candidates = [
             exe_dir,
@@ -132,8 +126,6 @@ def get_icon_path() -> str:
         logging.error("VelixNew_fixed.ico not found!")
         return os.path.join(exe_dir, 'VelixNew_fixed.ico')
     else:
-        # حالة PyArmor أو تشغيل مباشر
-        # __file__ بيديك المسار الحقيقي للسكريبت دايماً
         script_dir = os.path.dirname(os.path.abspath(__file__))
         candidates = [
             script_dir,
@@ -145,7 +137,7 @@ def get_icon_path() -> str:
             if os.path.exists(full):
                 logging.info(f"Found icon in: {full}")
                 return full
-        # fallback
+        
         return os.path.join(script_dir, 'VelixNew_fixed.ico')
 
 
@@ -210,7 +202,6 @@ class SettingsManager:
         entry.setdefault("timestamp", datetime.now().strftime("%Y-%m-%d %H:%M"))
         history = self.settings.setdefault("history", [])
         history.append(entry)
-        # Keep last 200 entries only
         if len(history) > 200:
             self.settings["history"] = history[-200:]
         self.save()
@@ -227,7 +218,6 @@ class SettingsManager:
 #  D. DOWNLOAD ENGINE
 # ══════════════════════════════════════════════════════════
 def _detect_platform(url: str) -> str:
-    """Detect the platform from the URL to apply platform-specific options."""
     url_lower = url.lower()
     if any(d in url_lower for d in ["twitter.com", "x.com", "t.co"]):
         return "twitter"
@@ -264,7 +254,6 @@ class DownloadEngine:
             "ffmpeg_location": self._ffmpeg_dir,
         }
 
-    # Browsers yt-dlp can pull cookies from, in preference order.
     _COOKIE_BROWSERS = ["chrome", "edge", "firefox", "brave", "opera", "vivaldi", "chromium"]
 
     def _find_twitter_cookies(self) -> str | None:
@@ -317,10 +306,8 @@ class DownloadEngine:
         return None
 
     def _platform_opts(self, url: str) -> dict:
-        """Return extra yt-dlp options specific to each platform."""
         platform = _detect_platform(url)
 
-        # Common browser-like headers that help bypass bot-detection
         common_headers = {
             "User-Agent": (
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -336,9 +323,6 @@ class DownloadEngine:
                     "Accept-Language": "en-US,en;q=0.9",
                 },
                 "noplaylist": True,
-                # Do NOT force syndication — it fails on most tweets since 2023.
-                # Let yt-dlp use its default Twitter extractor (GraphQL / guest token).
-                # Cookies are the most reliable fix; we try each browser in order.
             }
             cookie_browser = self._find_twitter_cookies()
             if cookie_browser:
@@ -372,7 +356,6 @@ class DownloadEngine:
                 "noplaylist": True,
             }
 
-        # YouTube and generic
         return {
             "noplaylist": True,
         }
@@ -382,7 +365,7 @@ class DownloadEngine:
             **self._base_opts(),
             **self._platform_opts(url),
             "skip_download": True,
-            "ignoreerrors":  False,   # False so we get real errors, not silent None
+            "ignoreerrors":  False,  
             "extract_flat":  False,
         }
         try:
@@ -390,7 +373,6 @@ class DownloadEngine:
                 info = ydl.extract_info(url, download=False)
                 if info is None:
                     raise ValueError("Unsupported URL or private content.")
-                # If it's a playlist/collection, grab the first real entry
                 if info.get("_type") == "playlist":
                     entries = info.get("entries") or []
                     entries = [e for e in entries if e]
@@ -401,7 +383,6 @@ class DownloadEngine:
         except yt_dlp.utils.DownloadError as e:
             logging.error(f"yt-dlp error during fetch: {e}")
             err_msg = str(e)
-            # Give a friendlier message for the most common Twitter failure
             if "twitter" in err_msg.lower() or "x.com" in err_msg.lower():
                 raise RuntimeError(
                     "Could not fetch Twitter/X video. "
@@ -415,16 +396,6 @@ class DownloadEngine:
             raise RuntimeError("Something went wrong while analyzing the link.")
 
     def _build_format_string(self, format_choice: str, platform: str) -> str:
-        """
-        Build the yt-dlp format selector.
-
-        Twitter, Instagram, TikTok, Reddit and Facebook don't expose
-        separate video+audio streams the way YouTube does.  Using
-        'bestvideo+bestaudio' on those platforms causes a merge failure
-        because only one combined stream is available.  We fall back to
-        'best' for those platforms so yt-dlp picks the single best
-        pre-muxed stream automatically.
-        """
         SINGLE_STREAM_PLATFORMS = {"twitter", "instagram", "tiktok", "reddit", "facebook"}
         is_single = platform in SINGLE_STREAM_PLATFORMS
 
@@ -436,10 +407,8 @@ class DownloadEngine:
                 return "best"
             return "bestvideo+bestaudio/best"
 
-        # Specific resolution, e.g. "1080p" → "1080"
         res = format_choice.replace("p", "")
         if is_single:
-            # Pick the best single stream at or below the requested height
             return f"best[height<={res}]/best"
         return (
             f"bestvideo[height<={res}]+bestaudio"
@@ -451,7 +420,6 @@ class DownloadEngine:
                     custom_name: str = None) -> dict:
         platform = _detect_platform(url)
         if custom_name and custom_name.strip():
-            # sanitize: remove chars invalid in filenames
             safe = "".join(c for c in custom_name.strip() if c not in r'\/:*?"<>|')
             template = os.path.join(output_path, f"{safe}.%(ext)s")
         else:
@@ -517,11 +485,7 @@ class DownloadEngine:
 
     # ── Parallel Queue support ─────────────────────────────
     def download_queue(self, items: list, output_path: str, format_choice: str,
-                       on_item_start, on_item_done, workers: int = 2):
-        """
-        Download a list of (url, title, custom_name) tuples in parallel.
-        workers = number of simultaneous downloads.
-        """
+                       on_item_start, on_item_done, workers: int = 2): 
         self.is_active = True
         self.stop_flag.clear()
 
@@ -891,9 +855,6 @@ class VelixApp(ctk.CTk):
         self.resizable(False, False)
         self.configure(fg_color=BG_COLOR)
         self.withdraw()
-       
-        # الأيقونة بتتحط بعد deiconify في _animate_splash
-        # عشان tkinter ما يعملش reset ليها
 
     
 
@@ -905,7 +866,7 @@ class VelixApp(ctk.CTk):
         )
         self._current_url     = ""
         self._sidebar_visible = False
-        self._queue           = []   # list of [url, title, status_var, custom_name, thumb_url]
+        self._queue           = []   
         self._queue_running   = False
         self._current_thumb_url = None
 
@@ -1062,7 +1023,6 @@ class VelixApp(ctk.CTk):
             command=self._browse_folder
         ).grid(row=0, column=4, padx=15, pady=15, sticky="w")
 
-        # Custom filename row
         ctk.CTkLabel(
             frame, text="File name:",
             font=ctk.CTkFont(size=12)
@@ -1131,7 +1091,6 @@ class VelixApp(ctk.CTk):
         self._queue_frame_outer = ctk.CTkFrame(self, fg_color=INPUT_BG, corner_radius=12)
         self._queue_frame_outer.pack(fill="x", padx=10, pady=(0, 6))
 
-        # Header row
         header = ctk.CTkFrame(self._queue_frame_outer, fg_color="transparent")
         header.pack(fill="x", padx=12, pady=(8, 4))
 
@@ -1180,7 +1139,6 @@ class VelixApp(ctk.CTk):
         )
         self.start_queue_btn.pack(side="right")
 
-        # Scrollable list
         self._queue_list_frame = ctk.CTkScrollableFrame(
             self._queue_frame_outer,
             height=110, fg_color="transparent",
@@ -1195,7 +1153,6 @@ class VelixApp(ctk.CTk):
             self._update_status("Please enter a URL first.", error=True)
             return
 
-        # Check for duplicate
         if any(item[0] == url for item in self._queue):
             self._update_status("This URL is already in the queue.", error=True)
             return
@@ -1204,7 +1161,6 @@ class VelixApp(ctk.CTk):
         custom_name = self.filename_entry.get().strip()
         thumb_url   = self._current_thumb_url
         status_var  = tk.StringVar(value="Pending")
-        # item = [url, title, status_var, custom_name, thumb_url]
         self._queue.append([url, title, status_var, custom_name, thumb_url])
         self._render_queue_item(len(self._queue) - 1, title, status_var, thumb_url)
         self._update_queue_count()
@@ -1222,7 +1178,6 @@ class VelixApp(ctk.CTk):
         row = ctk.CTkFrame(self._queue_list_frame, fg_color=CARD_COLOR, corner_radius=8)
         row.pack(fill="x", pady=3, padx=2)
 
-        # Thumbnail (small, loaded async)
         thumb_lbl = ctk.CTkLabel(
             row, text="", width=64, height=36,
             fg_color=BG_COLOR, corner_radius=4
@@ -1234,8 +1189,6 @@ class VelixApp(ctk.CTk):
                 args=(thumb_lbl, thumb_url),
                 daemon=True
             ).start()
-
-        # Index badge
         ctk.CTkLabel(
             row,
             text=f"{index + 1}",
@@ -1245,7 +1198,7 @@ class VelixApp(ctk.CTk):
             text_color="white"
         ).pack(side="left", padx=(0, 6), pady=6)
 
-        # Title
+    
         ctk.CTkLabel(
             row,
             text=title[:50] + ("…" if len(title) > 50 else ""),
@@ -1253,7 +1206,7 @@ class VelixApp(ctk.CTk):
             anchor="w"
         ).pack(side="left", fill="x", expand=True, pady=6)
 
-        # Status
+
         ctk.CTkLabel(
             row,
             textvariable=status_var,
@@ -1262,7 +1215,6 @@ class VelixApp(ctk.CTk):
             width=95
         ).pack(side="left", padx=6)
 
-        # Remove button
         ctk.CTkButton(
             row, text="✕", width=26, height=26,
             fg_color="transparent", hover_color="#cc0000",
@@ -1359,7 +1311,6 @@ class VelixApp(ctk.CTk):
             else:
                 self._queue[index][2].set("Failed")
 
-            # Check if all done
             done_count = sum(1 for item in self._queue if item[2].get() in ("Done", "Failed", "⏹ Stopped"))
             self.progress_bar.set(done_count / total)
 
@@ -1425,10 +1376,10 @@ class VelixApp(ctk.CTk):
     def _notify_queue_done(self, finished: int, total: int):
         """Show a Windows toast-style notification when queue completes."""
         try:
-            ctypes.windll.user32.MessageBeep(0x00000040)  # MB_ICONINFORMATION beep
+            ctypes.windll.user32.MessageBeep(0x00000040)  
         except Exception:
             pass
-        # Balloon tooltip via Shell_NotifyIcon is complex; use a simple topmost popup instead
+        
         popup = ctk.CTkToplevel(self)
         popup.title("")
         popup.overrideredirect(True)
@@ -1563,8 +1514,6 @@ class VelixApp(ctk.CTk):
         else:
             self._splash.destroy()
             self.deiconify()
-            # self._apply_icon()
-
     def _apply_icon(self):
        
         icon = get_icon_path()
