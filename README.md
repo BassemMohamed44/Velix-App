@@ -66,6 +66,20 @@ Users are responsible for complying with the terms of service of the platforms t
 - The app freezing issue has been fixed and Fixed Bugs. v2.1.2
 ---
 
+## Security
+
+Velix does not collect personal information.
+
+The application contains:
+
+- No advertisements
+- No telemetry
+- No analytics
+- No background tracking
+
+All downloads are performed locally on the user's device.
+
+
 ## License
 
 This project is licensed under the MIT License.
