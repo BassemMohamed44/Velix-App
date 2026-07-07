@@ -66,12 +66,16 @@ Users are responsible for complying with the terms of service of the platforms t
 - The app freezing issue has been fixed and Fixed Bugs. v2.1.2
 ---
 
-##  License
+## License
 
-Velix utilizes third-party open-source tools where applicable.
-All respective licenses remain the property of their original authors.
+This project is licensed under the MIT License.
 
----
+Velix includes and depends on several third-party open-source projects such as:
 
-© 2026 Velix. All rights reserved.
+- yt-dlp
+- CustomTkinter
+
+These libraries remain under their respective licenses.
+
+See the LICENSE file for more details.
 
