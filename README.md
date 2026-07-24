@@ -1,7 +1,8 @@
 <div align="center">
   <img width="260" height="260" src="assets/Velix.png" alt="velix-downloader-video-icon"/>
   <h1 align="center">Velix Downloader 𝐕🕷️🕸️</h1>
-  <p align="center">Velix is the lightweight, secure, and ad-free video downloader built for speed.</p>
+  <p align="center">Velix is the lightweight, secure, and ad-free video downloader built for speed. Extract audio and video in any quality from your favorite platforms.
+Clean interface. High performance. No distractions.</p>
 </div>
 
 <div align="center">
@@ -23,11 +24,8 @@
 
 <p align="center">Made possible by <a href="https://bassemmohamed.pages.dev/"><strong>BassemMohamed</strong></a></p>
 
-
-
-
-Velix is the lightweight, secure, and ad-free video downloader built for speed. Extract audio and video in any quality from your favorite platforms.
-Clean interface. High performance. No distractions.
+Download. Convert. Enjoy.
+Velix is a modern media downloader built for users who value speed, privacy, and simplicity. Download videos, extract high-quality audio, choose your preferred resolution, and enjoy an ad-free experience—all in one lightweight desktop application.
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-informational)
