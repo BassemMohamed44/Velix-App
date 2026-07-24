@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/static/v1?label=Security&message=Learning_Resources&color=4C0099" alt="security"/>
   <br>
   <img src="https://img.shields.io/static/v1?label=Python&message=Projects&color=4C0099" alt="projects"/>
-  <img src="https://img.shields.io/static/v1?label=Venom&message=Floating-Assistant&color=4C0099" alt="projects"/>
+  <img src="https://img.shields.io/static/v1?label=Velix&message=Downloader-Video&color=4C0099" alt="projects"/>
 </div>
 <br>
 <div align="center">
