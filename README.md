@@ -1,8 +1,37 @@
-# Velix App
+<div align="center">
+  <img width="260" height="260" src="assets/Velix.png" alt="velix-downloader-video-icon"/>
+  <h1 align="center">Velix Downloader 𝐕🕷️🕸️</h1>
+  <p align="center">Velix is the lightweight, secure, and ad-free video downloader built for speed.</p>
+</div>
+
+<div align="center">
+  <img src="https://img.shields.io/static/v1?label=Issues&message=0open&color=4C0099" alt="issues"/>
+  <img src="https://img.shields.io/static/v1?label=License&message=MIT&color=4C0099" alt="license"/>
+  <img src="https://img.shields.io/static/v1?label=Security&message=Learning_Resources&color=4C0099" alt="security"/>
+  <br>
+  <img src="https://img.shields.io/static/v1?label=Python&message=Projects&color=4C0099" alt="projects"/>
+  <img src="https://img.shields.io/static/v1?label=Venom&message=Floating-Assistant&color=4C0099" alt="projects"/>
+</div>
+<br>
+<div align="center">
+  
+  [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://instagram.com/@bassemmohamed_0)
+  [![Reddit](https://img.shields.io/badge/Reddit-%23FF4500.svg?style=for-the-badge&logo=Reddit&logoColor=white)](https://reddit.com/user/00xBassem)
+  [![X](https://img.shields.io/badge/X-black.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/@Basem2Mohamed)
+  
+</div>
+
+<p align="center">Made possible by <a href="https://bassemmohamed.pages.dev/"><strong>BassemMohamed</strong></a></p>
+
+
+
 
 Velix is the lightweight, secure, and ad-free video downloader built for speed. Extract audio and video in any quality from your favorite platforms.
-
 Clean interface. High performance. No distractions.
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-informational)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 
 ---
 
